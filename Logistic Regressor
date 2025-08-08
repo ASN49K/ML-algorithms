@@ -17,14 +17,14 @@ class Logistic_regressor:
         p=self.probability(X)
         diff=y-p
         return X.T@diff
-    def likelyhood(self,X,y):
+    def likelihood(self,X,y):
         result=1
         p=self.probability(X)
         for i in range(self.n):
             result*=p[i]**(y[i])
             result*=(1-p[i])**(1-y[i])
         return result
-    def log_likelyhood(self,X,y):
+    def log_likelihood(self,X,y):
         result=0
         p=self.probability(X)
         for i in range(self.n):
@@ -63,12 +63,12 @@ class Logistic_regressor:
             acc=accuracy_score(z , y)
             ok=(last==acc)
             last=acc
-            self.losses.append(self.log_likelyhood(X , y))
+            self.losses.append(self.log_likelihood(X , y))
             self.acc.append(accuracy_score(z , y))
             if it%1000==1:
                 print("accuracy is: ", accuracy_score(z , y))
-                print("likelyhood is: ",self.log_likelyhood(X , y))
-                #self.losses.append(self.log_likelyhood(X , y))
+                print("likelihood is: ",self.log_likelihood(X , y))
+                #self.losses.append(self.log_likelihood(X , y))
                 #self.acc.append(accuracy_score(z , y))
                 print("w is: ",self.w)
                 print("b is: " , self.b)
